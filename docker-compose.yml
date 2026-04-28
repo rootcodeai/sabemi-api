@@ -1,0 +1,73 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+        image: laravel-boilerplate-app
+        container_name: laravel-boilerplate-app
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        networks:
+            - laravel
+        depends_on:
+            - mysql
+            - redis
+
+    nginx:
+        image: nginx:alpine
+        container_name: laravel-boilerplate-nginx
+        restart: unless-stopped
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - laravel
+        depends_on:
+            - app
+
+    mysql:
+        image: mysql:8.0
+        container_name: laravel-boilerplate-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        ports:
+            - "${FORWARD_DB_PORT:-3306}:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - laravel
+
+    redis:
+        image: redis:alpine
+        container_name: laravel-boilerplate-redis
+        restart: unless-stopped
+        networks:
+            - laravel
+
+    mailpit:
+        image: axllent/mailpit:latest
+        container_name: laravel-boilerplate-mailpit
+        restart: unless-stopped
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
