@@ -1,0 +1,8 @@
+@include('admin.layouts.menu.inc.order')
+@include('admin.layouts.menu.inc.financial')
+@include('admin.layouts.menu.inc.insurance')
+@include('admin.layouts.menu.inc.search')
+@include('admin.layouts.menu.inc.general')
+@include('admin.layouts.menu.inc.report')
+@include('admin.layouts.menu.inc.contact')
+@include('admin.layouts.menu.inc.configuration')

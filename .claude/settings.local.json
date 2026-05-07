@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Develop\\\\RootCode\\\\example-template-admin\" -Force)",
+      "Bash(Select-Object Name, Mode)",
+      "PowerShell(ls \"C:\\\\Develop\\\\RootCode\\\\example-template-admin\\\\config\" | Where-Object { -not $_.PSIsContainer } | Select-Object Name)",
+      "Bash(xargs -I {} bash -c 'echo \"=== $\\(basename {}\\) ===\"; ls -1 {} | head -20')",
+      "Bash(Get-ChildItem -Path \"C:\\\\Develop\\\\RootCode\\\\sabemi-api\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "Bash(Get-ChildItem \"C:\\\\Develop\\\\RootCode\\\\example-template-admin\\\\resources\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)",
+      "Bash(Get-ChildItem \"C:\\\\Develop\\\\RootCode\\\\example-template-admin\\\\public\\\\assets\" -Recurse -Directory)",
+      "PowerShell(head -20)"
+    ]
+  }
+}

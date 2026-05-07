@@ -19,11 +19,13 @@ final class EloquentUserRepository implements UserRepositoryInterface
         }
         
         if (isset($filters['search'])) {
-            $query->where('name', 'like', "%{$filters['search']}%")
+            $query->where(function ($q) use ($filters) {
+                $q->where('name', 'like', "%{$filters['search']}%")
                   ->orWhere('email', 'like', "%{$filters['search']}%");
+            });
         }
 
-        return $query->paginate($filters['per_page'] ?? 15);
+        return $query->orderBy('name')->paginate($filters['per_page'] ?? 15);
     }
 
     public function store(array $data)
