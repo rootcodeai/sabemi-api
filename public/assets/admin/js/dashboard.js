@@ -99,7 +99,7 @@ function populateClientsNeverSoldTable(data) {
                  <td>${clientType}</td>
                  <td class="text-center">${createdDate}</td>
                  <td class="text-center">
-                    <a href="${route.replace('/0', `/${client.id}`)}" class="btn btn-default white-hover" title="Editar">
+                    <a href="${route.replace('/0', `/${client.id}`)}" class="btn btn-default white-hover">
                         <i class="fa el-icon-file-edit"></i>
                     </a>
                  </td>
@@ -132,7 +132,7 @@ function loadClientsInactive() {
             // A API agora retorna um objeto com 'data' e 'meta'
             let count = result.meta ? result.meta.total : 0;
             $('#clients-inactive').text(count);
-            
+
             // Popular a tabela se ela existir
             if ($('#clients-inactive-tbody').length) {
                 populateClientsInactiveTable(result.data || []);
@@ -152,7 +152,7 @@ function loadClientsInactive() {
 // Função para popular a tabela de clientes inativos
 function populateClientsInactiveTable(data) {
     const tbody = $('#clients-inactive-tbody');
-    
+
     if (!data || data.length === 0) {
         tbody.html('<tr><td colspan="7" class="text-center">Nenhum cliente inativo encontrado</td></tr>');
         return;
@@ -171,14 +171,14 @@ function populateClientsInactiveTable(data) {
                 <td class="text-center">${lastOrderDate}</td>
                 <td class="text-center">${client.days_since_last_order}</td>
                 <td class="text-center">
-                    <a href="${route.replace('/0', `/${client.id}`)}" class="btn btn-default white-hover" title="Editar">
+                    <a href="${route.replace('/0', `/${client.id}`)}" class="btn btn-default white-hover">
                         <i class="fa el-icon-file-edit"></i>
                     </a>
                 </td>
             </tr>
         `;
     });
-    
+
     tbody.html(rows);
 }
 

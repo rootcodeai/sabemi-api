@@ -30,8 +30,8 @@ final class UserController extends Controller
             $result = $this->service->index($filters);
             return new UserCollect($result);
         } catch (Exception $exception) {
-            $this->logError($exception, 'Error listing users', get_called_class().'@'.__FUNCTION__);
-            return response()->json(['message' => 'Error listing users'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logError($exception, 'Erro ao listar usuários', get_called_class().'@'.__FUNCTION__);
+            return response()->json(['message' => 'Erro ao listar usuários.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -43,8 +43,8 @@ final class UserController extends Controller
                 ->response()
                 ->setStatusCode(Response::HTTP_CREATED);
         } catch (Exception $exception) {
-            $this->logError($exception, 'Error creating user', get_called_class().'@'.__FUNCTION__);
-            return response()->json(['message' => 'Error creating user'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logError($exception, 'Erro ao criar usuário', get_called_class().'@'.__FUNCTION__);
+            return response()->json(['message' => 'Erro ao criar usuário.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,10 +54,10 @@ final class UserController extends Controller
             $result = $this->service->show($id);
             return new UserResource($result);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['message' => 'Usuário não encontrado.'], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
-            $this->logError($exception, 'Error showing user', get_called_class().'@'.__FUNCTION__);
-            return response()->json(['message' => 'Error showing user'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logError($exception, 'Erro ao exibir usuário', get_called_class().'@'.__FUNCTION__);
+            return response()->json(['message' => 'Erro ao exibir usuário.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -67,10 +67,10 @@ final class UserController extends Controller
             $result = $this->service->update($id, $request->validatedData());
             return new UserResource($result);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['message' => 'Usuário não encontrado.'], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
-            $this->logError($exception, 'Error updating user', get_called_class().'@'.__FUNCTION__);
-            return response()->json(['message' => 'Error updating user'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logError($exception, 'Erro ao atualizar usuário', get_called_class().'@'.__FUNCTION__);
+            return response()->json(['message' => 'Erro ao atualizar usuário.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,12 +78,12 @@ final class UserController extends Controller
     {
         try {
             $this->service->destroy($id);
-            return response()->json(['message' => 'User removed successfully'], Response::HTTP_OK);
+            return response()->json(['message' => 'Usuário removido com sucesso.'], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['message' => 'Usuário não encontrado.'], Response::HTTP_NOT_FOUND);
         } catch (Exception $exception) {
-            $this->logError($exception, 'Error removing user', get_called_class().'@'.__FUNCTION__);
-            return response()->json(['message' => 'Error removing user'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logError($exception, 'Erro ao remover usuário', get_called_class().'@'.__FUNCTION__);
+            return response()->json(['message' => 'Erro ao remover usuário.'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

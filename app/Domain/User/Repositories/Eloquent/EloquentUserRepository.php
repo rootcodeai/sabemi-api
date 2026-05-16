@@ -6,7 +6,6 @@ namespace App\Domain\User\Repositories\Eloquent;
 
 use App\Domain\User\Repositories\Contracts\UserRepositoryInterface;
 use App\Domain\User\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 final class EloquentUserRepository implements UserRepositoryInterface
 {
@@ -30,9 +29,6 @@ final class EloquentUserRepository implements UserRepositoryInterface
 
     public function store(array $data)
     {
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
         return User::create($data);
     }
 
@@ -44,9 +40,6 @@ final class EloquentUserRepository implements UserRepositoryInterface
     public function update(int $id, array $data)
     {
         $user = User::findOrFail($id);
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
         $user->update($data);
         return $user->fresh();
     }

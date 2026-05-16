@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\User\Services;
 
 use App\Domain\User\Repositories\Contracts\UserRepositoryInterface;
 
-class UserService
+final class UserService
 {
     public function __construct(
         protected UserRepositoryInterface $repository
@@ -17,7 +19,6 @@ class UserService
 
     public function store(array $data)
     {
-        // Business logic here, e.g. check duplicate email if not handled by request, send email
         return $this->repository->store($data);
     }
 
@@ -34,5 +35,10 @@ class UserService
     public function destroy(int $id)
     {
         return $this->repository->destroy($id);
+    }
+
+    public function findByEmail(string $email)
+    {
+        return $this->repository->findByEmail($email);
     }
 }
